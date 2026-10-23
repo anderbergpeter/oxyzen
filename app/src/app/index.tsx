@@ -27,7 +27,7 @@ const tiles: Tile[] = [
   {
     key: 'redlight',
     title: 'Rödljusterapi',
-    subtitle: 'Red light therapy',
+    subtitle: 'Ljusbehandling för hud och återhämtning',
     icon: 'sunny-outline',
     available: false,
   },

@@ -19,7 +19,7 @@ export default function Journey() {
     <Screen>
       <Title sub={protocol.name}>Min resa</Title>
       <Muted style={{ marginBottom: space.xl }}>
-        Resan går alltid till {FULL_EFFECT_SESSIONS} sessioner. Det är den dos som studierna mätt full effekt på.
+        Resan går alltid till {FULL_EFFECT_SESSIONS} sessioner, oavsett vilket protokoll du valt.
       </Muted>
 
       <View style={{ paddingLeft: 6 }}>
@@ -77,9 +77,7 @@ export default function Journey() {
                       : 'Klar'
                     : isNext
                       ? `Du är på ${done}, ${m.at - done} kvar`
-                      : isFull
-                        ? 'Full effekt enligt studierna'
-                        : ''}
+                      : ''}
                 </Text>
                 {isNext ? (
                   <Text style={{ fontSize: 16, color: colors.text, marginTop: 6, lineHeight: 24 }}>{m.short}</Text>

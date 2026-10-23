@@ -44,7 +44,7 @@ const standardMilestones: Milestone[] = [
     title: 'Fördjupning klar',
     short: 'Fyrtio sessioner. Du är i det spann som kliniska program jobbar i.',
     long:
-      'Fyrtio sessioner vid 2,0 ATA är den dos som bland annat Sagol Centers fibromyalgi-studie (2015) byggde på, och som många kliniska program för hjärnhälsa och återhämtning använder. Vi gör inga medicinska påståenden, men du har nu gett kroppen den dosen. Full effekt enligt studierna kommer vid 60, det är 20 kvar.',
+      'Fyrtio sessioner vid 2,0 ATA är den dos som bland annat Sagol Centers fibromyalgi-studie (2015) byggde på, och som många kliniska program för hjärnhälsa och återhämtning använder. Vi gör inga medicinska påståenden, men du har nu gett kroppen den dosen. Hela kuren är 60, det är 20 kvar.',
   },
   {
     at: 50,
@@ -56,9 +56,9 @@ const standardMilestones: Milestone[] = [
   {
     at: 60,
     title: 'Longevity klar',
-    short: 'Sextio sessioner. Full effekt enligt studierna. Nu är det dags för paus.',
+    short: 'Sextio sessioner. Hela kuren är genomförd. Nu är det dags för paus.',
     long:
-      'Sextio sessioner på ungefär tre månader är det protokoll som Sagol Center studerade 2020. I en grupp friska 64+ mätte man 20–38 % längre telomerer och 11–37 % färre åldrade immunceller, och i en randomiserad studie på friska 60+ förbättrades uppmärksamhet, bearbetningshastighet och exekutiva funktioner jämfört med kontrollgruppen. Det är den fulla dosen som forskningen bygger på. Vi rekommenderar en paus på 4–8 veckor, sedan underhåll eller en ny kur.',
+      'Sextio sessioner på ungefär tre månader är det protokoll som Sagol Center studerade 2020. I en grupp friska 64+ mätte man 20–38 % längre telomerer och 11–37 % färre åldrade immunceller, och i en randomiserad studie på friska 60+ förbättrades uppmärksamhet, bearbetningshastighet och exekutiva funktioner jämfört med kontrollgruppen. Vi rekommenderar en paus på 4–8 veckor, sedan underhåll eller en ny kur.',
   },
 ];
 
