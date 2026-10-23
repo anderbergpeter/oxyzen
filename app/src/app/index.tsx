@@ -33,8 +33,8 @@ const tiles: Tile[] = [
   },
   {
     key: 'tens',
-    title: 'TENS',
-    subtitle: 'Bäckenbottenstol',
+    title: 'Magnetstolsträning',
+    subtitle: 'Elektromagnetisk muskelstimulering',
     icon: 'pulse-outline',
     available: false,
   },
