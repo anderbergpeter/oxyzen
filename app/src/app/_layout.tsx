@@ -51,8 +51,9 @@ function Gate({ children }: { children: React.ReactNode }) {
 }
 
 export default function RootLayout() {
-  const [fontsLoaded] = useFonts({ Jost_300Light, Jost_400Regular });
-  if (!fontsLoaded) return null;
+  const [fontsLoaded, fontError] = useFonts({ Jost_300Light, Jost_400Regular });
+  // Rita appen även om typsnittet inte kan hämtas, då faller loggan tillbaka på systemfont.
+  if (!fontsLoaded && !fontError) return null;
   return (
     <SafeAreaProvider>
       <AuthProvider>
