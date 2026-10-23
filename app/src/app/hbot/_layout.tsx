@@ -1,7 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { Tabs } from 'expo-router';
 import React from 'react';
-import { ActivityIndicator, View } from 'react-native';
+import { ActivityIndicator, Platform, View } from 'react-native';
 import { useStore } from '@/lib/store';
 import { colors } from '@/lib/theme';
 
@@ -21,7 +21,11 @@ export default function TabsLayout() {
         headerShown: false,
         tabBarActiveTintColor: colors.tealDark,
         tabBarInactiveTintColor: colors.textMuted,
-        tabBarStyle: { backgroundColor: colors.card, borderTopColor: colors.border },
+        tabBarStyle: {
+          backgroundColor: colors.card,
+          borderTopColor: colors.border,
+          ...(Platform.OS === 'web' ? { height: 66, paddingTop: 8, paddingBottom: 10 } : null),
+        },
         tabBarLabelStyle: { fontSize: 11, fontWeight: '500' },
       }}
     >
