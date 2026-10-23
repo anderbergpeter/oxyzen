@@ -1,7 +1,7 @@
 // Enkel service worker: cachar appens filer vid första besöket så att den
 // startar även utan nät. Nätverket får företräde för sidan själv, så nya
 // versioner kommer in så fort man är online.
-const CACHE = 'oxyzen-v1';
+const CACHE = 'oxyzen-v2';
 const BASE = '/oxyzen/';
 const SHELL = [BASE, BASE + 'manifest.json', BASE + 'icon-192.png', BASE + 'icon-512.png', BASE + 'apple-touch-icon.png'];
 
@@ -27,7 +27,7 @@ self.addEventListener('fetch', (event) => {
   // Navigering: nät först, annars cachad startsida.
   if (req.mode === 'navigate') {
     event.respondWith(
-      fetch(req)
+      fetch(req, { cache: 'no-cache' })
         .then((res) => {
           const copy = res.clone();
           caches.open(CACHE).then((c) => c.put(BASE, copy));

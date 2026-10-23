@@ -1,10 +1,9 @@
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import React from 'react';
-import { Pressable, Text, View } from 'react-native';
+import { Pressable, ScrollView, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Wordmark } from '@/components/Wordmark';
-import { Muted } from '@/components/ui';
 import { colors, fonts, radius, space } from '@/lib/theme';
 
 interface Tile {
@@ -39,56 +38,44 @@ const tiles: Tile[] = [
     icon: 'pulse-outline',
     available: false,
   },
-  {
-    key: 'soon',
-    title: 'Kommer snart',
-    subtitle: 'Fler behandlingar på väg',
-    icon: 'sparkles-outline',
-    available: false,
-  },
 ];
 
-function TileCard({ tile }: { tile: Tile }) {
+function TileRow({ tile }: { tile: Tile }) {
   const { available } = tile;
   return (
     <Pressable
       onPress={tile.onPress}
       disabled={!available}
       style={({ pressed }) => ({
-        flex: 1,
-        aspectRatio: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
         backgroundColor: available ? colors.card : colors.grayLight,
         borderRadius: radius.lg,
-        borderWidth: 1,
-        borderColor: available ? colors.tealMid : colors.border,
-        padding: space.lg,
-        justifyContent: 'space-between',
+        borderWidth: available ? 2 : 1,
+        borderColor: available ? colors.teal : colors.border,
+        paddingVertical: space.xl,
+        paddingHorizontal: space.lg,
+        marginBottom: space.md,
         opacity: pressed ? 0.85 : 1,
       })}
     >
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-        <View
-          style={{
-            width: 44,
-            height: 44,
-            borderRadius: 22,
-            backgroundColor: available ? colors.tealLight : colors.segmentBg,
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <Ionicons name={tile.icon} size={22} color={available ? colors.tealDark : colors.textMuted} />
-        </View>
-        {!available ? (
-          <View style={{ backgroundColor: colors.segmentBg, paddingHorizontal: 8, paddingVertical: 3, borderRadius: 999 }}>
-            <Text style={{ fontSize: 12, letterSpacing: 1, color: colors.textSecondary }}>SNART</Text>
-          </View>
-        ) : null}
+      <View
+        style={{
+          width: 60,
+          height: 60,
+          borderRadius: 30,
+          backgroundColor: available ? colors.tealLight : colors.segmentBg,
+          alignItems: 'center',
+          justifyContent: 'center',
+          marginRight: space.lg,
+        }}
+      >
+        <Ionicons name={tile.icon} size={30} color={available ? colors.tealDark : colors.textMuted} />
       </View>
-      <View>
+      <View style={{ flex: 1 }}>
         <Text
           style={{
-            fontSize: 22,
+            fontSize: 28,
             fontFamily: fonts.serif,
             color: available ? colors.text : colors.textSecondary,
             marginBottom: 2,
@@ -96,8 +83,23 @@ function TileCard({ tile }: { tile: Tile }) {
         >
           {tile.title}
         </Text>
-        <Text style={{ fontSize: 14, color: colors.textMuted }}>{tile.subtitle}</Text>
+        <Text style={{ fontSize: 18, color: available ? colors.textSecondary : colors.textMuted }}>{tile.subtitle}</Text>
+        {!available ? (
+          <View
+            style={{
+              alignSelf: 'flex-start',
+              backgroundColor: colors.segmentBg,
+              paddingHorizontal: 12,
+              paddingVertical: 5,
+              borderRadius: 999,
+              marginTop: 8,
+            }}
+          >
+            <Text style={{ fontSize: 14, letterSpacing: 1.5, color: colors.textSecondary }}>KOMMER SNART</Text>
+          </View>
+        ) : null}
       </View>
+      {available ? <Ionicons name="chevron-forward" size={28} color={colors.tealDark} /> : null}
     </Pressable>
   );
 }
@@ -105,27 +107,31 @@ function TileCard({ tile }: { tile: Tile }) {
 export default function Menu() {
   const insets = useSafeAreaInsets();
   return (
-    <View
-      style={{
-        flex: 1,
-        backgroundColor: colors.bg,
+    <ScrollView
+      style={{ flex: 1, backgroundColor: colors.bg }}
+      contentContainerStyle={{
+        flexGrow: 1,
         paddingTop: insets.top + space.xxl * 2,
         paddingBottom: insets.bottom + space.xl,
         paddingHorizontal: space.lg,
       }}
     >
-      <Wordmark align="center" />
+      <Wordmark align="center" size="hero" />
+      <View style={{ flex: 1, minHeight: space.xxl * 2 }} />
+      <Text
+        style={{
+          fontSize: 22,
+          color: colors.textSecondary,
+          textAlign: 'center',
+          marginBottom: space.lg,
+        }}
+      >
+        Välj vad du vill göra
+      </Text>
+      {tiles.map((t) => (
+        <TileRow key={t.key} tile={t} />
+      ))}
       <View style={{ flex: 1 }} />
-      <Muted style={{ textAlign: 'center', marginBottom: space.md, letterSpacing: 0.3 }}>Välj vad du vill göra</Muted>
-      <View style={{ flexDirection: 'row', gap: space.md, marginBottom: space.md }}>
-        <TileCard tile={tiles[0]} />
-        <TileCard tile={tiles[1]} />
-      </View>
-      <View style={{ flexDirection: 'row', gap: space.md }}>
-        <TileCard tile={tiles[2]} />
-        <TileCard tile={tiles[3]} />
-      </View>
-      <View style={{ flex: 1 }} />
-    </View>
+    </ScrollView>
   );
 }
