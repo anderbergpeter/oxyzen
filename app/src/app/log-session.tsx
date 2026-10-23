@@ -22,6 +22,7 @@ export default function LogSession() {
   const [pressure, setPressure] = useState(state.settings.lastPressure);
   const [duration, setDuration] = useState(state.settings.lastDuration);
   const [cycle, setCycle] = useState<MaskCycle>(state.settings.lastCycle);
+  const [showCycle, setShowCycle] = useState(false);
 
   const parsed = customDate ? new Date(customDate) : null;
   const customOk = parsed !== null && !Number.isNaN(parsed.getTime());
@@ -72,9 +73,20 @@ export default function LogSession() {
       <Segmented options={durationOptions.map((d) => ({ value: d, label: `${d} min` }))} value={duration} onChange={setDuration} />
       <View style={{ height: space.lg }} />
 
-      <Text style={styles.label}>Maskcykel</Text>
-      <Segmented options={cycleOptions.map((c) => ({ value: c.value, label: c.label }))} value={cycle} onChange={setCycle} />
-      <Muted style={{ marginTop: 6 }}>{cycleOptions.find((c) => c.value === cycle)?.hint}</Muted>
+      {showCycle ? (
+        <>
+          <Text style={styles.label}>Maskcykel</Text>
+          <Segmented options={cycleOptions.map((o) => ({ value: o.value, label: o.label }))} value={cycle} onChange={setCycle} />
+          <Muted style={{ marginTop: 6 }}>{cycleOptions.find((o) => o.value === cycle)?.hint}</Muted>
+        </>
+      ) : (
+        <Button
+          title={`Maskcykel ${cycleOptions.find((o) => o.value === cycle)?.label ?? ''} · Ändra`}
+          variant="ghost"
+          onPress={() => setShowCycle(true)}
+          style={{ alignSelf: 'flex-start', paddingHorizontal: 0 }}
+        />
+      )}
 
       <View style={{ height: space.xl }} />
       <Button title="Spara och gå till check-in" onPress={save} disabled={!!customDate && !customOk} />

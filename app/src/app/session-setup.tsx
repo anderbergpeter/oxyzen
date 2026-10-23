@@ -12,6 +12,7 @@ export default function SessionSetup() {
   const [pressure, setPressure] = useState(state.settings.lastPressure);
   const [duration, setDuration] = useState(state.settings.lastDuration);
   const [cycle, setCycle] = useState<MaskCycle>(state.settings.lastCycle);
+  const [showCycle, setShowCycle] = useState(false);
   const [advanced, setAdvanced] = useState(false);
 
   const c = parseCycle(cycle);
@@ -52,9 +53,20 @@ export default function SessionSetup() {
       <Segmented options={durationOptions.map((d) => ({ value: d, label: `${d} min` }))} value={duration} onChange={setDuration} />
 
       <View style={{ height: space.lg }} />
-      <Text style={styles.label}>Maskcykel</Text>
-      <Segmented options={cycleOptions.map((o) => ({ value: o.value, label: o.label }))} value={cycle} onChange={setCycle} />
-      <Muted style={{ marginTop: 6 }}>{cycleOptions.find((o) => o.value === cycle)?.hint}</Muted>
+      {showCycle ? (
+        <>
+          <Text style={styles.label}>Maskcykel</Text>
+          <Segmented options={cycleOptions.map((o) => ({ value: o.value, label: o.label }))} value={cycle} onChange={setCycle} />
+          <Muted style={{ marginTop: 6 }}>{cycleOptions.find((o) => o.value === cycle)?.hint}</Muted>
+        </>
+      ) : (
+        <Button
+          title={`Maskcykel ${cycleOptions.find((o) => o.value === cycle)?.label ?? ''} · Ändra`}
+          variant="ghost"
+          onPress={() => setShowCycle(true)}
+          style={{ alignSelf: 'flex-start', paddingHorizontal: 0 }}
+        />
+      )}
 
       <Card style={{ marginTop: space.xl }}>
         <Text style={{ fontSize: 17, fontWeight: '600', color: colors.text, marginBottom: 4 }}>Så fungerar det</Text>
