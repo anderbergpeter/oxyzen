@@ -219,7 +219,7 @@ export const cycleOptions: { value: Protocol['cycle']; label: string; hint: stri
   { value: '20/5', label: '20 / 5', hint: 'Standard. Mask på 20 min, av 5 min.' },
   { value: '25/5', label: '25 / 5', hint: 'Längre syrgasblock.' },
   { value: '30/5', label: '30 / 5', hint: 'Färre pauser.' },
-  { value: 'none', label: 'Utan cykel', hint: 'Inga larm. För samtal eller om masken sitter hela tiden.' },
+  { value: 'none', label: 'Av', hint: 'Inga larm. Masken sitter på hela tiden, eller så sköter kammaren cyklerna själv.' },
 ];
 
 export const ADVANCED_PRESSURE = 2.0;

@@ -53,21 +53,19 @@ export default function SessionSetup() {
       <Segmented options={durationOptions.map((d) => ({ value: d, label: `${d} min` }))} value={duration} onChange={setDuration} />
 
       <View style={{ height: space.lg }} />
+      <Button
+        title={`Maskcykel: ${cycleOptions.find((o) => o.value === cycle)?.label ?? ''}`}
+        variant="ghost"
+        icon={showCycle ? 'chevron-up' : 'chevron-down'}
+        onPress={() => setShowCycle((v) => !v)}
+        style={{ alignSelf: 'flex-start', paddingHorizontal: 0 }}
+      />
       {showCycle ? (
         <>
-          <Text style={styles.label}>Maskcykel</Text>
           <Segmented options={cycleOptions.map((o) => ({ value: o.value, label: o.label }))} value={cycle} onChange={setCycle} />
           <Muted style={{ marginTop: 6 }}>{cycleOptions.find((o) => o.value === cycle)?.hint}</Muted>
-          <Button title="Dölj" variant="ghost" onPress={() => setShowCycle(false)} style={{ alignSelf: 'flex-start', paddingHorizontal: 0 }} />
         </>
-      ) : (
-        <Button
-          title={`Maskcykel ${cycleOptions.find((o) => o.value === cycle)?.label ?? ''} · Ändra`}
-          variant="ghost"
-          onPress={() => setShowCycle(true)}
-          style={{ alignSelf: 'flex-start', paddingHorizontal: 0 }}
-        />
-      )}
+      ) : null}
 
       <Card style={{ marginTop: space.xl }}>
         <Text style={{ fontSize: 17, fontWeight: '600', color: colors.text, marginBottom: 4 }}>Så fungerar det</Text>

@@ -23,7 +23,7 @@ import type {
   Settings,
 } from './types';
 
-const STORAGE_KEY = 'oxyzen.state.v2';
+const STORAGE_KEY = 'oxyzen.state.v3';
 
 // Startläge: kunden har precis köpt 40 sessioner och loggat in.
 // Köp och saldo kommer från centret, inte från appen.
@@ -37,7 +37,7 @@ export const initialState: AppState = {
   },
   purchases: [{ id: 'seed-40', date: new Date().toISOString(), count: 40, note: 'Paket 40 sessioner' }],
   sessions: [],
-  settings: { sound: true, haptics: true, flash: true, notifications: true, reminders: true, reminderDays: 5, lastPressure: 1.5, lastDuration: 60, lastCycle: '20/5' },
+  settings: { sound: true, haptics: true, flash: true, notifications: true, reminders: true, reminderDays: 5, lastPressure: 1.5, lastDuration: 60, lastCycle: 'none' },
 };
 
 type Action =

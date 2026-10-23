@@ -73,21 +73,19 @@ export default function LogSession() {
       <Segmented options={durationOptions.map((d) => ({ value: d, label: `${d} min` }))} value={duration} onChange={setDuration} />
       <View style={{ height: space.lg }} />
 
+      <Button
+        title={`Maskcykel: ${cycleOptions.find((o) => o.value === cycle)?.label ?? ''}`}
+        variant="ghost"
+        icon={showCycle ? 'chevron-up' : 'chevron-down'}
+        onPress={() => setShowCycle((v) => !v)}
+        style={{ alignSelf: 'flex-start', paddingHorizontal: 0 }}
+      />
       {showCycle ? (
         <>
-          <Text style={styles.label}>Maskcykel</Text>
           <Segmented options={cycleOptions.map((o) => ({ value: o.value, label: o.label }))} value={cycle} onChange={setCycle} />
           <Muted style={{ marginTop: 6 }}>{cycleOptions.find((o) => o.value === cycle)?.hint}</Muted>
-          <Button title="Dölj" variant="ghost" onPress={() => setShowCycle(false)} style={{ alignSelf: 'flex-start', paddingHorizontal: 0 }} />
         </>
-      ) : (
-        <Button
-          title={`Maskcykel ${cycleOptions.find((o) => o.value === cycle)?.label ?? ''} · Ändra`}
-          variant="ghost"
-          onPress={() => setShowCycle(true)}
-          style={{ alignSelf: 'flex-start', paddingHorizontal: 0 }}
-        />
-      )}
+      ) : null}
 
       <View style={{ height: space.xl }} />
       <Button title="Spara och gå till check-in" onPress={save} disabled={!!customDate && !customOk} />
