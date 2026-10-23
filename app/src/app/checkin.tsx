@@ -8,7 +8,7 @@ import { colors, space } from '@/lib/theme';
 function Scale({ label, value, onChange, low, high }: { label: string; value: number; onChange: (v: number) => void; low: string; high: string }) {
   return (
     <View style={{ marginBottom: space.xl }}>
-      <Text style={{ fontSize: 16, fontWeight: '600', color: colors.text, marginBottom: 10 }}>{label}</Text>
+      <Text style={{ fontSize: 18, fontWeight: '600', color: colors.text, marginBottom: 10 }}>{label}</Text>
       <View style={{ flexDirection: 'row', gap: 8 }}>
         {[1, 2, 3, 4, 5].map((n) => {
           const active = n === value;
@@ -27,7 +27,7 @@ function Scale({ label, value, onChange, low, high }: { label: string; value: nu
                 justifyContent: 'center',
               }}
             >
-              <Text style={{ fontSize: 17, fontWeight: '600', color: active ? colors.tealDarker : colors.textSecondary }}>{n}</Text>
+              <Text style={{ fontSize: 19, fontWeight: '600', color: active ? colors.tealDarker : colors.textSecondary }}>{n}</Text>
             </Pressable>
           );
         })}

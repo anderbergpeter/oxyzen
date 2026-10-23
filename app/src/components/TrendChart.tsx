@@ -48,7 +48,7 @@ export function TrendChart({ series, height = 120 }: { series: TrendSeries[]; he
         {series.map((s) => (
           <View key={s.label} style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
             <View style={{ width: 10, height: 10, borderRadius: 5, backgroundColor: s.color }} />
-            <Text style={{ fontSize: 12, color: colors.textSecondary }}>{s.label}</Text>
+            <Text style={{ fontSize: 14, color: colors.textSecondary }}>{s.label}</Text>
           </View>
         ))}
       </View>

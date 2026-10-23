@@ -43,7 +43,7 @@ export default function Home() {
           <Ionicons name="grid-outline" size={18} color={colors.tealDark} />
         </Pressable>
         <View style={{ flex: 1 }}>
-          <Text style={{ fontSize: 22, fontWeight: '500', color: colors.text, fontFamily: fonts.serif }}>
+          <Text style={{ fontSize: 25, fontWeight: '500', color: colors.text, fontFamily: fonts.serif }}>
             Hyperbar syrgasbehandling
           </Text>
           <Muted>
@@ -63,10 +63,10 @@ export default function Home() {
 
       {protocolComplete ? (
         <Card tone="amber">
-          <Text style={{ fontSize: 15, fontWeight: '600', color: colors.amberDark, marginBottom: 4 }}>
+          <Text style={{ fontSize: 17, fontWeight: '600', color: colors.amberDark, marginBottom: 4 }}>
             Protokollet är klart
           </Text>
-          <Text style={{ fontSize: 14, color: colors.amberText, lineHeight: 20 }}>
+          <Text style={{ fontSize: 16, color: colors.amberText, lineHeight: 24 }}>
             Vi rekommenderar en paus på {PAUSE_WEEKS[0]}–{PAUSE_WEEKS[1]} veckor. Byt sedan till Underhåll eller starta
             en ny kur under Profil.
           </Text>
@@ -75,10 +75,10 @@ export default function Home() {
         <Card tone="teal" onPress={() => router.push({ pathname: '/milestone', params: { at: String(nextMilestone.at) } })}>
           <Muted style={{ color: colors.tealDark }}>Nästa milstolpe</Muted>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <Text style={{ fontSize: 17, fontWeight: '600', color: colors.tealDarker, flex: 1 }}>
+            <Text style={{ fontSize: 19, fontWeight: '600', color: colors.tealDarker, flex: 1 }}>
               {nextMilestone.at} · {nextMilestone.title}
             </Text>
-            <Text style={{ fontSize: 14, color: colors.tealDark }}>
+            <Text style={{ fontSize: 16, color: colors.tealDark }}>
               om {nextMilestone.at - done} {nextMilestone.at - done === 1 ? 'session' : 'sessioner'}
             </Text>
           </View>
@@ -90,8 +90,8 @@ export default function Home() {
       derived.daysSinceLast >= state.settings.reminderDays &&
       !protocolComplete ? (
         <Card tone="amber">
-          <Text style={{ fontSize: 15, fontWeight: '600', color: colors.amberDark, marginBottom: 4 }}>Dags för nästa?</Text>
-          <Text style={{ fontSize: 14, color: colors.amberText, lineHeight: 20 }}>
+          <Text style={{ fontSize: 17, fontWeight: '600', color: colors.amberDark, marginBottom: 4 }}>Dags för nästa?</Text>
+          <Text style={{ fontSize: 16, color: colors.amberText, lineHeight: 24 }}>
             Det har gått {derived.daysSinceLast} dagar sedan senast. Protokollen bygger på 3–5 sessioner i veckan,
             det är kontinuiteten som bär effekten.
           </Text>
@@ -109,7 +109,7 @@ export default function Home() {
         <Card tone="blue" style={{ marginTop: space.md }}>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <Ionicons name="information-circle-outline" size={18} color={colors.blue} style={{ marginRight: 8 }} />
-            <Text style={{ fontSize: 14, color: colors.blueDark, flex: 1 }}>
+            <Text style={{ fontSize: 16, color: colors.blueDark, flex: 1 }}>
               Inga sessioner kvar på kortet. Fyll på i receptionen, så syns det här direkt.
             </Text>
           </View>

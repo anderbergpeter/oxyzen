@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { NativeScrollEvent, NativeSyntheticEvent, ScrollView, Text, View } from 'react-native';
 import { colors, fonts } from '@/lib/theme';
 
-const ITEM = 40;
+const ITEM = 44;
 const VISIBLE = 5;
 
 // Enkel snurra: en lista som snäpper till ett värde i mitten.

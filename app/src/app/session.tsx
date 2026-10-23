@@ -261,13 +261,13 @@ export default function SessionScreen() {
       <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: space.lg }}>
         <View style={{ flex: 1 }}>
           <Muted style={{ color: colors.tealDark }}>Session {derived.done + 1}</Muted>
-          <Text style={{ fontSize: 15, fontWeight: '600', color: colors.tealDarker }}>
+          <Text style={{ fontSize: 17, fontWeight: '600', color: colors.tealDarker }}>
             {formatPressure(pressure)} · {durationMin} min · {hasCycle ? `mask ${cycle}` : 'utan cykel'}
           </Text>
         </View>
         {paused ? (
           <View style={{ backgroundColor: colors.amberLight, paddingHorizontal: 10, paddingVertical: 4, borderRadius: 999 }}>
-            <Text style={{ color: colors.amberDark, fontSize: 12, fontWeight: '600' }}>Pausad</Text>
+            <Text style={{ color: colors.amberDark, fontSize: 14, fontWeight: '600' }}>Pausad</Text>
           </View>
         ) : null}
       </View>
@@ -276,7 +276,7 @@ export default function SessionScreen() {
         <Text style={{ fontSize: 72, fontWeight: '500', color: colors.text, letterSpacing: 1, fontVariant: ['tabular-nums'], fontFamily: fonts.serif }}>
           {formatClock(remainingTotal)}
         </Text>
-        <Muted style={{ fontSize: 15, marginBottom: space.xl }}>kvar av {durationMin} minuter</Muted>
+        <Muted style={{ fontSize: 17, marginBottom: space.xl }}>kvar av {durationMin} minuter</Muted>
 
         <View
           style={{
@@ -288,16 +288,16 @@ export default function SessionScreen() {
           }}
         >
           <Ionicons name={phaseIcon} size={36} color={finished ? colors.teal : phase.maskOn ? colors.tealDark : colors.amber} />
-          <Text style={{ fontSize: 28, fontWeight: '500', color: colors.text, marginTop: 8, fontFamily: fonts.serif }}>{phaseTitle}</Text>
+          <Text style={{ fontSize: 32, fontWeight: '500', color: colors.text, marginTop: 8, fontFamily: fonts.serif }}>{phaseTitle}</Text>
           {!finished ? (
             <>
               <Text style={{ fontSize: 44, fontWeight: '600', color: phase.maskOn ? colors.tealDark : colors.amber, marginTop: 4, fontVariant: ['tabular-nums'] }}>
                 {formatClock(remainingPhase)}
               </Text>
-              <Muted style={{ fontSize: 14 }}>{nextLabel}</Muted>
+              <Muted style={{ fontSize: 16 }}>{nextLabel}</Muted>
             </>
           ) : (
-            <Muted style={{ fontSize: 14, marginTop: 4 }}>Bra jobbat. Ta av masken och res dig långsamt.</Muted>
+            <Muted style={{ fontSize: 16, marginTop: 4 }}>Bra jobbat. Ta av masken och res dig långsamt.</Muted>
           )}
         </View>
 
@@ -349,7 +349,7 @@ export default function SessionScreen() {
             })}
           >
             <Ionicons name={paused ? 'play' : 'pause'} size={18} color={colors.text} style={{ marginRight: 8 }} />
-            <Text style={{ fontSize: 16, fontWeight: '600', color: colors.text }}>{paused ? 'Fortsätt' : 'Pausa'}</Text>
+            <Text style={{ fontSize: 18, fontWeight: '600', color: colors.text }}>{paused ? 'Fortsätt' : 'Pausa'}</Text>
           </Pressable>
           <Pressable
             onPress={endEarly}
@@ -365,7 +365,7 @@ export default function SessionScreen() {
               opacity: pressed ? 0.8 : 1,
             })}
           >
-            <Text style={{ fontSize: 16, fontWeight: '600', color: colors.red }}>Avsluta</Text>
+            <Text style={{ fontSize: 18, fontWeight: '600', color: colors.red }}>Avsluta</Text>
           </Pressable>
         </View>
       )}

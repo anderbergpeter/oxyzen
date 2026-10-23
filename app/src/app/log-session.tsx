@@ -84,5 +84,5 @@ export default function LogSession() {
 }
 
 const styles = {
-  label: { fontSize: 13, color: colors.textSecondary, marginBottom: 6, fontWeight: '500' as const },
+  label: { fontSize: 15, color: colors.textSecondary, marginBottom: 6, fontWeight: '500' as const },
 };

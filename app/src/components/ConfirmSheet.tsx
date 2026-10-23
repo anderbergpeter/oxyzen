@@ -28,8 +28,8 @@ export function ConfirmSheet({ request, onClose }: { request: ConfirmRequest | n
         >
           {request ? (
             <>
-              <Text style={{ fontSize: 20, fontWeight: '600', color: colors.text, marginBottom: 6 }}>{request.title}</Text>
-              <Text style={{ fontSize: 15, color: colors.textSecondary, lineHeight: 22, marginBottom: space.lg }}>
+              <Text style={{ fontSize: 22, fontWeight: '600', color: colors.text, marginBottom: 6 }}>{request.title}</Text>
+              <Text style={{ fontSize: 17, color: colors.textSecondary, lineHeight: 26, marginBottom: space.lg }}>
                 {request.message}
               </Text>
               <Button

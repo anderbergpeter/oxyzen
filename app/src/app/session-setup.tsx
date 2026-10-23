@@ -32,7 +32,7 @@ export default function SessionSetup() {
       />
       <Muted style={{ marginTop: 6 }}>Trycket styrs av kammaren, det här är för din egen logg.</Muted>
       {seniorWarn ? (
-        <Text style={{ fontSize: 13, color: colors.amberText, marginTop: 6 }}>Över 1,6 ATA för 65+: stäm av med personalen.</Text>
+        <Text style={{ fontSize: 15, color: colors.amberText, marginTop: 6 }}>Över 1,6 ATA för 65+: stäm av med personalen.</Text>
       ) : null}
       {!advanced ? (
         <Button
@@ -42,7 +42,7 @@ export default function SessionSetup() {
           style={{ alignSelf: 'flex-start', paddingHorizontal: 0 }}
         />
       ) : (
-        <Text style={{ fontSize: 13, color: colors.amberText, marginTop: 8 }}>
+        <Text style={{ fontSize: 15, color: colors.amberText, marginTop: 8 }}>
           Över 2,0 ATA är inte ett wellness-protokoll. Bara efter överenskommelse med personalen.
         </Text>
       )}
@@ -57,8 +57,8 @@ export default function SessionSetup() {
       <Muted style={{ marginTop: 6 }}>{cycleOptions.find((o) => o.value === cycle)?.hint}</Muted>
 
       <Card style={{ marginTop: space.xl }}>
-        <Text style={{ fontSize: 15, fontWeight: '600', color: colors.text, marginBottom: 4 }}>Så fungerar det</Text>
-        <Text style={{ fontSize: 14, color: colors.textSecondary, lineHeight: 20 }}>
+        <Text style={{ fontSize: 17, fontWeight: '600', color: colors.text, marginBottom: 4 }}>Så fungerar det</Text>
+        <Text style={{ fontSize: 16, color: colors.textSecondary, lineHeight: 24 }}>
           {c
             ? `Appen larmar med ljud, vibration och blinkande skärm varje gång du ska ta av eller sätta på masken. Med ${cycle} och ${duration} minuter blir det ${switches} paus${switches === 1 ? '' : 'er'}. Skärmen hålls tänd under sessionen.`
             : 'Inga larm. Appen räknar bara ner tiden och håller skärmen tänd.'}
@@ -81,5 +81,5 @@ export default function SessionSetup() {
 }
 
 const styles = {
-  label: { fontSize: 13, color: colors.textSecondary, marginBottom: 6, fontWeight: '500' as const },
+  label: { fontSize: 15, color: colors.textSecondary, marginBottom: 6, fontWeight: '500' as const },
 };

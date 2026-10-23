@@ -60,14 +60,14 @@ export default function Journey() {
                 <View style={{ flex: 1, paddingLeft: space.md, paddingBottom: last ? 0 : space.xl }}>
                   <Text
                     style={{
-                      fontSize: 16,
+                      fontSize: 18,
                       fontWeight: '600',
                       color: reached ? colors.text : isNext ? colors.tealDark : colors.textMuted,
                     }}
                   >
                     {m.at} · {m.title}
                   </Text>
-                  <Text style={{ fontSize: 13, color: colors.textSecondary, marginTop: 2 }}>
+                  <Text style={{ fontSize: 15, color: colors.textSecondary, marginTop: 2 }}>
                     {reached
                       ? date
                         ? `Klar ${formatDate(date)}`
@@ -77,7 +77,7 @@ export default function Journey() {
                         : ''}
                   </Text>
                   {isNext ? (
-                    <Text style={{ fontSize: 14, color: colors.text, marginTop: 6, lineHeight: 20 }}>{m.short}</Text>
+                    <Text style={{ fontSize: 16, color: colors.text, marginTop: 6, lineHeight: 24 }}>{m.short}</Text>
                   ) : null}
                 </View>
               </Pressable>
@@ -88,8 +88,8 @@ export default function Journey() {
 
       {target && done >= target ? (
         <Card tone="amber" style={{ marginTop: space.xl }}>
-          <Text style={{ fontSize: 15, fontWeight: '600', color: colors.amberDark }}>Dags för paus</Text>
-          <Text style={{ fontSize: 14, color: colors.amberText, marginTop: 4, lineHeight: 20 }}>
+          <Text style={{ fontSize: 17, fontWeight: '600', color: colors.amberDark }}>Dags för paus</Text>
+          <Text style={{ fontSize: 16, color: colors.amberText, marginTop: 4, lineHeight: 24 }}>
             Hela protokollet är genomfört. Vila 4–8 veckor, sedan Underhåll eller en ny kur.
           </Text>
         </Card>

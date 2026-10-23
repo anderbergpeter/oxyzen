@@ -40,7 +40,7 @@ export function ProgressRing({
         />
       </Svg>
       <Text style={{ fontSize: size * 0.26, fontWeight: '500', color: colors.tealDarker, fontFamily: fonts.serif }}>{value}</Text>
-      {label ? <Text style={{ fontSize: 14, color: colors.tealDarker, marginTop: -2 }}>{label}</Text> : null}
+      {label ? <Text style={{ fontSize: 16, color: colors.tealDarker, marginTop: -2 }}>{label}</Text> : null}
     </View>
   );
 }

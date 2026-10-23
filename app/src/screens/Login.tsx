@@ -77,7 +77,7 @@ export function Login() {
             maxLength={6}
             autoFocus
             onSubmitEditing={code.length === 6 ? verify : undefined}
-            style={{ fontSize: 24, letterSpacing: 6, textAlign: 'center' }}
+            style={{ fontSize: 27, letterSpacing: 6, textAlign: 'center' }}
           />
           {error ? <Text style={{ color: colors.red, marginBottom: space.sm }}>{error}</Text> : null}
           {busy ? (

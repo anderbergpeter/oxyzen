@@ -81,14 +81,14 @@ function TileCard({ tile }: { tile: Tile }) {
         </View>
         {!available ? (
           <View style={{ backgroundColor: colors.segmentBg, paddingHorizontal: 8, paddingVertical: 3, borderRadius: 999 }}>
-            <Text style={{ fontSize: 10, letterSpacing: 1, color: colors.textSecondary }}>SNART</Text>
+            <Text style={{ fontSize: 12, letterSpacing: 1, color: colors.textSecondary }}>SNART</Text>
           </View>
         ) : null}
       </View>
       <View>
         <Text
           style={{
-            fontSize: 20,
+            fontSize: 22,
             fontFamily: fonts.serif,
             color: available ? colors.text : colors.textSecondary,
             marginBottom: 2,
@@ -96,7 +96,7 @@ function TileCard({ tile }: { tile: Tile }) {
         >
           {tile.title}
         </Text>
-        <Text style={{ fontSize: 12, color: colors.textMuted }}>{tile.subtitle}</Text>
+        <Text style={{ fontSize: 14, color: colors.textMuted }}>{tile.subtitle}</Text>
       </View>
     </Pressable>
   );

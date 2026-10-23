@@ -24,9 +24,9 @@ export default function TabsLayout() {
         tabBarStyle: {
           backgroundColor: colors.card,
           borderTopColor: colors.border,
-          ...(Platform.OS === 'web' ? { height: 66, paddingTop: 8, paddingBottom: 10 } : null),
+          ...(Platform.OS === 'web' ? { height: 72, paddingTop: 8, paddingBottom: 10 } : null),
         },
-        tabBarLabelStyle: { fontSize: 11, fontWeight: '500' },
+        tabBarLabelStyle: { fontSize: 13, fontWeight: '500' },
       }}
     >
       <Tabs.Screen

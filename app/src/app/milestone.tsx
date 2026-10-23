@@ -30,7 +30,7 @@ export default function Milestone() {
       <View style={{ alignItems: 'center', marginBottom: space.md }}>
         <Pill tone={reached ? 'teal' : 'gray'}>{reached ? 'Uppnådd' : `${m.at - derived.done} kvar`}</Pill>
       </View>
-      <Text style={{ fontSize: 24, fontWeight: '600', color: colors.text, textAlign: 'center', marginBottom: space.lg }}>
+      <Text style={{ fontSize: 27, fontWeight: '600', color: colors.text, textAlign: 'center', marginBottom: space.lg }}>
         {m.title}
       </Text>
       <Card>

@@ -54,10 +54,10 @@ export default function History() {
                   <Text style={{ fontWeight: '600', color: colors.tealDarker }}>{number}</Text>
                 </View>
                 <View style={{ flex: 1 }}>
-                  <Text style={{ fontSize: 15, fontWeight: '600', color: colors.text }}>
+                  <Text style={{ fontSize: 17, fontWeight: '600', color: colors.text }}>
                     {formatDateLong(s.date)} · {formatTime(s.date)}
                   </Text>
-                  <Text style={{ fontSize: 13, color: colors.textSecondary, marginTop: 2 }}>
+                  <Text style={{ fontSize: 15, color: colors.textSecondary, marginTop: 2 }}>
                     {formatPressure(s.pressure)} · {s.durationMin} min ·{' '}
                     {s.cycle === 'none' ? 'utan maskcykel' : `mask ${s.cycle}`}
                     {s.completedInApp ? '' : ' · loggad'}

@@ -71,7 +71,7 @@ export default function Profile() {
         />
         {state.settings.reminders ? (
           <View style={{ paddingTop: 12 }}>
-            <Text style={{ fontSize: 13, color: colors.textSecondary, marginBottom: 8 }}>Efter så här många dagar utan session</Text>
+            <Text style={{ fontSize: 15, color: colors.textSecondary, marginBottom: 8 }}>Efter så här många dagar utan session</Text>
             <WheelPicker
               values={reminderDayValues}
               value={state.settings.reminderDays}
@@ -95,7 +95,7 @@ export default function Profile() {
         <>
           <SectionTitle>Konto</SectionTitle>
           <Card>
-            <Text style={{ fontSize: 14, color: colors.text, lineHeight: 21 }}>
+            <Text style={{ fontSize: 16, color: colors.text, lineHeight: 25 }}>
               Du använder appen utan konto. Allt sparas bara på den här telefonen och försvinner om appen tas bort.
             </Text>
           </Card>
