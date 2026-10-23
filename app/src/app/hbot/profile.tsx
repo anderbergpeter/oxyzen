@@ -1,6 +1,6 @@
 import { router } from 'expo-router';
 import React from 'react';
-import { Switch, Text, View } from 'react-native';
+import { Platform, Switch, Text, View, type SwitchProps } from 'react-native';
 import { useConfirm } from '@/components/ConfirmSheet';
 import { WheelPicker } from '@/components/WheelPicker';
 import { Button, Card, Muted, Row, Screen, SectionTitle, Title } from '@/components/ui';
@@ -10,6 +10,13 @@ import { useActions, useStore } from '@/lib/store';
 import { colors, space } from '@/lib/theme';
 
 const reminderDayValues = Array.from({ length: 180 }, (_, i) => i + 1);
+
+// Webben ignorerar trackColor, där heter det activeTrackColor/activeThumbColor.
+const switchColors = {
+  trackColor: { true: colors.teal, false: colors.gray },
+  thumbColor: Platform.OS === 'android' ? colors.card : undefined,
+  ...(Platform.OS === 'web' ? { activeTrackColor: colors.teal, activeThumbColor: colors.card } : {}),
+} as SwitchProps;
 
 export default function Profile() {
   const { state, derived } = useStore();
@@ -51,12 +58,12 @@ export default function Profile() {
 
       <SectionTitle>Larm i kammaren</SectionTitle>
       <Card>
-        <Row label="Ljud" value={<Switch value={state.settings.sound} onValueChange={toggle('sound')} trackColor={{ true: colors.teal }} />} />
-        <Row label="Vibration" value={<Switch value={state.settings.haptics} onValueChange={toggle('haptics')} trackColor={{ true: colors.teal }} />} />
-        <Row label="Blinkande skärm" value={<Switch value={state.settings.flash} onValueChange={toggle('flash')} trackColor={{ true: colors.teal }} />} />
+        <Row label="Ljud" value={<Switch value={state.settings.sound} onValueChange={toggle('sound')} {...switchColors} />} />
+        <Row label="Vibration" value={<Switch value={state.settings.haptics} onValueChange={toggle('haptics')} {...switchColors} />} />
+        <Row label="Blinkande skärm" value={<Switch value={state.settings.flash} onValueChange={toggle('flash')} {...switchColors} />} />
         <Row
           label="Notiser i bakgrunden"
-          value={<Switch value={state.settings.notifications} onValueChange={toggle('notifications')} trackColor={{ true: colors.teal }} />}
+          value={<Switch value={state.settings.notifications} onValueChange={toggle('notifications')} {...switchColors} />}
           last
         />
       </Card>
@@ -66,7 +73,7 @@ export default function Profile() {
       <Card>
         <Row
           label="Påminn mig om uppehåll"
-          value={<Switch value={state.settings.reminders} onValueChange={toggle('reminders')} trackColor={{ true: colors.teal }} />}
+          value={<Switch value={state.settings.reminders} onValueChange={toggle('reminders')} {...switchColors} />}
           last={!state.settings.reminders}
         />
         {state.settings.reminders ? (
