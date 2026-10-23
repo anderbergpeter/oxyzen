@@ -74,7 +74,18 @@ Filerna som gör den till en PWA ligger i `public/`:
 - `icon-*.png`, `apple-touch-icon.png` – genererade ikoner (ring i mässing
   på sand). Byt ut mot riktiga när loggan finns som bild.
 
-Hosting: ladda upp `dist/` till valfri statisk host. Gratisalternativ som
+Publicera till GitHub Pages (https://anderbergpeter.github.io/oxyzen/):
+
+```bash
+npm run deploy
+```
+
+Bygger och pushar `dist/` till grenen `gh-pages`, som Pages serverar.
+Sökvägarna i `public/` är satta till `/oxyzen/` för det. Vill du hosta
+på en egen domän i roten: ta bort `baseUrl` i `app.json` och byt
+`/oxyzen/` mot `/` i `public/`.
+
+Annan hosting: ladda upp `dist/` till valfri statisk host. Gratisalternativ som
 fungerar direkt: Cloudflare Pages, Netlify, Vercel. Kräver HTTPS, vilket
 alla tre ger automatiskt. Eftersom appen är en single-page app behöver
 hosten skicka `index.html` för alla sökvägar (Netlify: `_redirects` med
