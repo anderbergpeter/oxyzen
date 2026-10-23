@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="sv">
+  <head>
+    <meta charset="utf-8" />
+    <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover" />
+    <title>Oxyzen</title>
+
+    <link rel="manifest" href="/oxyzen/manifest.json" />
+    <meta name="theme-color" content="#F3EDE4" />
+    <meta name="application-name" content="Oxyzen" />
+
+    <!-- iOS: installerbar från Safari via Dela > Lägg till på hemskärmen -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Oxyzen" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <link rel="apple-touch-icon" href="/oxyzen/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/oxyzen/icon-192.png" />
+
+    <style id="expo-reset">
+      html,
+      body {
+        height: 100%;
+        background: #f3ede4;
+      }
+      body {
+        overflow: hidden;
+        overscroll-behavior: none;
+        -webkit-tap-highlight-color: transparent;
+        -webkit-touch-callout: none;
+      }
+      #root {
+        display: flex;
+        height: 100%;
+        flex: 1;
+      }
+    </style>
+  <link rel="icon" href="/oxyzen/favicon.ico"/></head>
+
+  <body>
+    <noscript>Du behöver aktivera JavaScript för att använda appen.</noscript>
+    <div id="root"></div>
+    <script>
+      if ('serviceWorker' in navigator && location.hostname !== 'localhost') {
+        window.addEventListener('load', function () {
+          navigator.serviceWorker.register('/oxyzen/sw.js', { scope: '/oxyzen/' }).catch(function () {});
+        });
+      }
+    </script>
+  <script src="/oxyzen/_expo/static/js/web/entry-aa2682b88c06ef88a129dca2c49b8d2f.js" defer></script>
+</body>
+</html>
