@@ -89,6 +89,12 @@ tidslinjen), en kort text (push-notis och kort i Hem) och en längre text
 | 50 | Slutspurt | Femtio sessioner. Tio kvar till hela forskningsprotokollet. | Håll i rytmen den sista biten. Det är kontinuiteten över hela kuren som studierna bygger på, inte enskilda sessioner. |
 | 60 | Longevity klar | Sextio sessioner. Hela forskningsprotokollet. Nu är det dags för paus. | Sextio sessioner på ungefär tre månader är det protokoll som Sagol Center studerade 2020, där man såg längre telomerer och färre åldrade celler i immunsystemet. Vi rekommenderar en paus på 4–8 veckor. Appen säger till när det är dags att börja med underhåll. |
 
+Min resa i appen visar alltid hela vägen till 60 oavsett valt protokoll,
+med en markering där det egna protokollet slutar. 60 är "full effekt
+enligt studierna": Sagol Centers telomer-studie (Hachmo 2020) och den
+randomiserade kognitionsstudien på friska 60+ (Hadanny 2020) bygger båda
+på 60 sessioner, 2,0 ATA, 90 min, 5 dagar i veckan.
+
 Protokoll-specifika avvikelser:
 
 - **Prova på** har bara milstolpe 1 och ett eget avslut: "Vill du fortsätta?

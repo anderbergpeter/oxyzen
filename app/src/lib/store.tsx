@@ -8,7 +8,7 @@ import React, {
   useReducer,
   useRef,
 } from 'react';
-import { getProtocol, recommendedPressure } from './protocols';
+import { getProtocol, journeyMilestonesFor, recommendedPressure } from './protocols';
 import { clearQueue, enqueue, flush, opsForAction, pull, type Pulled } from './sync';
 import { useAuth } from './auth';
 import type {
@@ -120,6 +120,7 @@ function reducer(state: AppState, action: Action): AppState {
 
 export interface Derived {
   protocol: Protocol;
+  journey: Milestone[];
   age: number | null;
   done: number;
   purchased: number;
@@ -156,8 +157,9 @@ function computeDerived(state: AppState): Derived {
   const remaining = Math.max(0, purchased - done);
   const target = protocol.sessions;
   const progress = target ? Math.min(1, done / target) : 0;
-  const reachedMilestones = protocol.milestones.filter((m) => m.at <= done);
-  const nextMilestone = protocol.milestones.find((m) => m.at > done) ?? null;
+  const journey = journeyMilestonesFor(protocol);
+  const reachedMilestones = journey.filter((m) => m.at <= done);
+  const nextMilestone = journey.find((m) => m.at > done) ?? null;
   const lastSession = done > 0 ? state.sessions[done - 1] : null;
   const now = new Date();
   const sessionsThisMonth = state.sessions.filter((s) => {
@@ -184,6 +186,7 @@ function computeDerived(state: AppState): Derived {
 
   return {
     protocol,
+    journey,
     age,
     done,
     purchased,

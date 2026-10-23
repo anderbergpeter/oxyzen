@@ -37,28 +37,28 @@ const standardMilestones: Milestone[] = [
     title: 'Halvvägs i resan',
     short: 'Trettio sessioner. Halvvägs till det fulla 60-protokollet.',
     long:
-      'Nu är du i det spann där de flesta beskriver att återhämtning efter träning och fokus under dagen känns annorlunda. Fortsätt med samma rytm, 3–5 gånger i veckan ger bäst kontinuitet.',
+      'Kliniker som jobbar med dagliga sessioner beskriver att nya små blodkärl börjar bildas efter 6–8 sessioner och att den processen stabiliseras runt 30–40. Det är här många säger att återhämtning efter träning och fokus under dagen känns annorlunda. Håll rytmen, 3–5 gånger i veckan.',
   },
   {
     at: 40,
     title: 'Fördjupning klar',
     short: 'Fyrtio sessioner. Du är i det spann som kliniska program jobbar i.',
     long:
-      'Program för hjärnhälsa, fibromyalgi och återhämtning efter skada använder ofta 40 sessioner. Vi gör inga medicinska påståenden, men du har nu gett kroppen den dos som de programmen bygger på. Vill du gå hela vägen är det 20 kvar.',
+      'Fyrtio sessioner vid 2,0 ATA är den dos som bland annat Sagol Centers fibromyalgi-studie (2015) byggde på, och som många kliniska program för hjärnhälsa och återhämtning använder. Vi gör inga medicinska påståenden, men du har nu gett kroppen den dosen. Full effekt enligt studierna kommer vid 60, det är 20 kvar.',
   },
   {
     at: 50,
     title: 'Slutspurt',
     short: 'Femtio sessioner. Tio kvar till hela forskningsprotokollet.',
     long:
-      'Håll i rytmen den sista biten. Det är kontinuiteten över hela kuren som studierna bygger på, inte enskilda sessioner.',
+      'Håll i rytmen den sista biten. Studierna som mätt effekt på telomerer, åldrade celler och kognition bygger alla på hela kuren om 60 sessioner, inte på enskilda besök.',
   },
   {
     at: 60,
     title: 'Longevity klar',
-    short: 'Sextio sessioner. Hela forskningsprotokollet. Nu är det dags för paus.',
+    short: 'Sextio sessioner. Full effekt enligt studierna. Nu är det dags för paus.',
     long:
-      'Sextio sessioner på ungefär tre månader är det protokoll som Sagol Center studerade 2020, där man såg längre telomerer och färre åldrade celler i immunsystemet. Vi rekommenderar en paus på 4–8 veckor. Appen säger till när det är dags att börja med underhåll.',
+      'Sextio sessioner på ungefär tre månader är det protokoll som Sagol Center studerade 2020. I en grupp friska 64+ mätte man 20–38 % längre telomerer och 11–37 % färre åldrade immunceller, och i en randomiserad studie på friska 60+ förbättrades uppmärksamhet, bearbetningshastighet och exekutiva funktioner jämfört med kontrollgruppen. Det är den fulla dosen som forskningen bygger på. Vi rekommenderar en paus på 4–8 veckor, sedan underhåll eller en ny kur.',
   },
 ];
 
@@ -198,6 +198,17 @@ export const protocols: Protocol[] = [
     milestones: [],
   },
 ];
+
+// Resan visas alltid hela vägen till 60, som är full effekt enligt studierna,
+// oavsett vilket protokoll man valt. Protokollets egna texter (t.ex. Varsam)
+// ersätter standardtexten vid samma antal.
+export const FULL_EFFECT_SESSIONS = 60;
+export function journeyMilestonesFor(protocol: Protocol): Milestone[] {
+  const overrides = new Map(protocol.milestones.map((m) => [m.at, m]));
+  const merged = standardMilestones.map((m) => overrides.get(m.at) ?? m);
+  for (const m of protocol.milestones) if (!merged.some((x) => x.at === m.at)) merged.push(m);
+  return merged.sort((a, b) => a.at - b.at);
+}
 
 export const getProtocol = (id: ProtocolId): Protocol =>
   protocols.find((p) => p.id === id) ?? protocols[1];

@@ -51,7 +51,7 @@ export default function CheckinScreen() {
   const [note, setNote] = useState(session?.checkin?.note ?? '');
 
   const number = session ? state.sessions.findIndex((s) => s.id === session.id) + 1 : derived.done;
-  const milestone = derived.protocol.milestones.find((m) => m.at === number);
+  const milestone = derived.journey.find((m) => m.at === number);
 
   const done = () => {
     if (session) actions.setCheckin(session.id, { energy, sleep, focus, note: note.trim() || undefined });

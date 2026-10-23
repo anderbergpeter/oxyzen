@@ -10,7 +10,7 @@ export default function Milestone() {
   const { at } = useLocalSearchParams<{ at: string }>();
   const { derived } = useStore();
   const n = parseInt(at ?? '0', 10);
-  const m = derived.protocol.milestones.find((x) => x.at === n);
+  const m = derived.journey.find((x) => x.at === n);
 
   if (!m) {
     return (
