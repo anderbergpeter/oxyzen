@@ -16,7 +16,9 @@
       "supportsTablet": false,
       "bundleIdentifier": "se.oxyzen.app",
       "infoPlist": {
-        "UIBackgroundModes": ["audio"]
+        "UIBackgroundModes": [
+          "audio"
+        ]
       }
     },
     "android": {
@@ -40,9 +42,14 @@
       "expo-font",
       [
         "expo-notifications",
-        { "color": "#1D9E75" }
+        {
+          "color": "#1D9E75"
+        }
       ]
     ],
-    "experiments": { "typedRoutes": true }
+    "experiments": {
+      "typedRoutes": true,
+      "baseUrl": "/oxyzen"
+    }
   }
 }
