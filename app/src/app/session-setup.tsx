@@ -58,6 +58,7 @@ export default function SessionSetup() {
           <Text style={styles.label}>Maskcykel</Text>
           <Segmented options={cycleOptions.map((o) => ({ value: o.value, label: o.label }))} value={cycle} onChange={setCycle} />
           <Muted style={{ marginTop: 6 }}>{cycleOptions.find((o) => o.value === cycle)?.hint}</Muted>
+          <Button title="Dölj" variant="ghost" onPress={() => setShowCycle(false)} style={{ alignSelf: 'flex-start', paddingHorizontal: 0 }} />
         </>
       ) : (
         <Button
