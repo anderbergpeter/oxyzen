@@ -90,9 +90,72 @@ Begränsningar i PWA jämfört med native:
   (Wake Lock, iOS 16.4+).
 - Påminnelsen efter X dagar visas som kort i appen, inte som push.
 
+## Backend (Supabase)
+
+Sessioner, köp och profil sparas centralt hos Oxyzen i Supabase (Postgres
+med inloggning och radnivå-rättigheter). Appen fungerar offline och
+synkar när den får nät. Utan nycklar i `.env` kör appen i lokalt läge
+utan inloggning, bra för demo.
+
+### Skapa projektet (en gång)
+
+1. Skapa ett konto på [supabase.com](https://supabase.com) och ett nytt
+   projekt (gratisnivån räcker länge). Välj region **Frankfurt (eu-central-1)**
+   så datan stannar i EU.
+2. Kör schemat: öppna SQL Editor i Supabase-dashboarden och klistra in
+   innehållet i `../supabase/migrations/20261023090000_init.sql`. Alternativt
+   `npx supabase link` + `npx supabase db push` från repo-roten.
+3. Inloggningskod i stället för magisk länk: Authentication > Email Templates >
+   Magic Link. Byt innehållet mot `../supabase/templates/magic_link.html`
+   (det viktiga är att `{{ .Token }}` finns med).
+4. Authentication > Providers > Email: slå av "Confirm email" om det är på
+   (koden räcker som bekräftelse).
+5. Project Settings > API: kopiera **Project URL** och **anon public key** till
+   `app/.env`:
+
+   ```
+   EXPO_PUBLIC_SUPABASE_URL=https://xxxx.supabase.co
+   EXPO_PUBLIC_SUPABASE_ANON_KEY=eyJ...
+   ```
+
+   Starta om `npx expo start` efter ändring i `.env`.
+
+### Vardag för personalen (tills admin-webben finns)
+
+- **Registrera ett köp:** Table Editor > `purchases` > Insert row. `user_id`
+  hittar du i Authentication > Users (kunden måste ha loggat in en gång,
+  eller läggas till med "Invite user"). `count` = antal sessioner.
+- **Se saldo:** Table Editor > vyn `balances` visar köpta, genomförda och
+  kvar per kund.
+- **Rätta en session:** Table Editor > `sessions`.
+- **Ge någon personalrättigheter** (ser alla kunder, får lägga in köp):
+  lägg in personens `user_id` i tabellen `staff`.
+
+### Lokalt för utveckling
+
+Kräver Docker Desktop. Från repo-roten:
+
+```bash
+npx supabase start      # startar Postgres, auth, Studio och Mailpit lokalt
+npx supabase status     # visar URL och nycklar
+npx supabase stop
+```
+
+Lägg `API URL` och `anon key` i `app/.env`. Inloggningskoder hamnar i
+Mailpit på http://127.0.0.1:54324 i stället för att skickas som mejl.
+Studio (databas-gränssnitt) finns på http://127.0.0.1:54323.
+
+### Hur synken fungerar
+
+- Vid inloggning hämtas profil, köp och sessioner från servern, som är
+  sanningen. Köp kan bara personal lägga in.
+- Varje ändring i appen (session, check-in, protokollbyte, inställning)
+  läggs i en kö som skickas direkt, eller vid nästa start om nätet är nere.
+- Utloggning rensar appens lokala data så nästa kund inte ser den.
+
 ## Nästa steg
 
-- Backend (Supabase) + inloggning + admin-webb så att centret registrerar
-  köp och sessioner. Se `../docs/koncept.md`.
+- Admin-webb för personalen (kunder, köp, saldo) i stället för Supabase
+  Table Editor.
 - App Store / Google Play via EAS Build.
 - Engelska.

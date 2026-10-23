@@ -5,3 +5,8 @@ web-build/
 *.log
 .DS_Store
 .claude/
+
+# Hemligheter
+.env
+.env.*
+!.env.example

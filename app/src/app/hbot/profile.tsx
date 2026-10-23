@@ -5,6 +5,7 @@ import { useConfirm } from '@/components/ConfirmSheet';
 import { WheelPicker } from '@/components/WheelPicker';
 import { Button, Card, Muted, Row, Screen, SectionTitle, Title } from '@/components/ui';
 import { formatDate } from '@/lib/format';
+import { useAuth } from '@/lib/auth';
 import { useActions, useStore } from '@/lib/store';
 import { colors, space } from '@/lib/theme';
 
@@ -14,6 +15,7 @@ export default function Profile() {
   const { state, derived } = useStore();
   const actions = useActions();
   const { confirm, sheet } = useConfirm();
+  const auth = useAuth();
 
   const resetAll = () =>
     confirm({
@@ -79,6 +81,28 @@ export default function Profile() {
           </View>
         ) : null}
       </Card>
+
+      {auth.configured && auth.session ? (
+        <>
+          <SectionTitle>Konto</SectionTitle>
+          <Card>
+            <Row label="Inloggad som" value={auth.email ?? ''} last />
+          </Card>
+          <Button title="Logga ut" variant="secondary" icon="log-out-outline" onPress={() => auth.signOut()} />
+          <Muted>Dina sessioner och köp ligger hos Oxyzen och finns kvar när du loggar in igen.</Muted>
+        </>
+      ) : auth.configured ? (
+        <>
+          <SectionTitle>Konto</SectionTitle>
+          <Card>
+            <Text style={{ fontSize: 14, color: colors.text, lineHeight: 21 }}>
+              Du använder appen utan konto. Allt sparas bara på den här telefonen och försvinner om appen tas bort.
+            </Text>
+          </Card>
+          <Button title="Logga in" variant="secondary" icon="log-in-outline" onPress={() => auth.leaveLocalMode()} />
+          <Muted>Dina sessioner följer med när du loggar in.</Muted>
+        </>
+      ) : null}
 
       <View style={{ height: space.xl }} />
       <Button title="Radera all data" variant="danger" onPress={resetAll} />

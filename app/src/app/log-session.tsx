@@ -15,13 +15,13 @@ function daysAgoIso(days: number, hour = 10) {
 }
 
 export default function LogSession() {
-  const { derived } = useStore();
+  const { state, derived } = useStore();
   const actions = useActions();
   const [daysAgo, setDaysAgo] = useState(0);
   const [customDate, setCustomDate] = useState('');
-  const [pressure, setPressure] = useState(derived.recommendedPressure);
-  const [duration, setDuration] = useState(derived.protocol.durationMin);
-  const [cycle, setCycle] = useState<MaskCycle>(derived.protocol.cycle);
+  const [pressure, setPressure] = useState(state.settings.lastPressure);
+  const [duration, setDuration] = useState(state.settings.lastDuration);
+  const [cycle, setCycle] = useState<MaskCycle>(state.settings.lastCycle);
 
   const parsed = customDate ? new Date(customDate) : null;
   const customOk = parsed !== null && !Number.isNaN(parsed.getTime());

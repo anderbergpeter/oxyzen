@@ -171,11 +171,15 @@ Löpande kostnad: ca 0 kr/mån tills vi passerar tusentals kunder.
 
 ---
 
-## 4b. Status 2026-10-21
+## 4b. Status 2026-10-23
 
-Första versionen av appen är byggd i `app/` (Expo). Allt lokalt, ingen
-inloggning. Se `app/README.md` för struktur och hur man kör. Påminnelse
-efter X dagar (default 5) finns som inställning.
+- Appen är byggd i `app/` (Expo SDK 57), varm spa-design, huvudmeny med
+  fyra behandlingar (HBOT aktiv). Byggs även som PWA.
+- Backend i Supabase: schema i `supabase/migrations/`, inloggning med
+  e-postkod, synk från appen med offline-kö. Personal registrerar köp i
+  Supabase Table Editor tills admin-webben finns.
+- Repo: github.com/anderbergpeter/oxyzen (privat).
+- Se `app/README.md` för hur man kör, bygger PWA och sätter upp Supabase.
 
 ## 5. Saker att reda ut
 

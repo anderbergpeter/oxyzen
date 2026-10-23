@@ -175,6 +175,7 @@ export default function SessionScreen() {
       if (savedRef.current) return;
       savedRef.current = true;
       cancelSwitchNotifications();
+      actions.updateSettings({ lastPressure: pressure, lastDuration: durationMin, lastCycle: cycle });
       const id = actions.addSession({
         date: new Date(startedAt.current).toISOString(),
         durationMin: minutes,

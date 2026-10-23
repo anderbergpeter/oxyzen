@@ -110,7 +110,7 @@ export default function Home() {
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <Ionicons name="information-circle-outline" size={18} color={colors.blue} style={{ marginRight: 8 }} />
             <Text style={{ fontSize: 14, color: colors.blueDark, flex: 1 }}>
-              Inga sessioner kvar på kortet. Lägg till köpta sessioner under Profil.
+              Inga sessioner kvar på kortet. Fyll på i receptionen, så syns det här direkt.
             </Text>
           </View>
         </Card>

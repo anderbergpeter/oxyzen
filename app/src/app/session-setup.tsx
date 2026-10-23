@@ -8,10 +8,10 @@ import { colors, space } from '@/lib/theme';
 import type { MaskCycle } from '@/lib/types';
 
 export default function SessionSetup() {
-  const { derived } = useStore();
-  const [pressure, setPressure] = useState(derived.recommendedPressure);
-  const [duration, setDuration] = useState(derived.protocol.durationMin);
-  const [cycle, setCycle] = useState<MaskCycle>(derived.protocol.cycle);
+  const { state, derived } = useStore();
+  const [pressure, setPressure] = useState(state.settings.lastPressure);
+  const [duration, setDuration] = useState(state.settings.lastDuration);
+  const [cycle, setCycle] = useState<MaskCycle>(state.settings.lastCycle);
   const [advanced, setAdvanced] = useState(false);
 
   const c = parseCycle(cycle);

@@ -70,6 +70,9 @@ export interface Settings {
   notifications: boolean;
   reminders: boolean;
   reminderDays: number;
+  lastPressure: number;
+  lastDuration: number;
+  lastCycle: MaskCycle;
 }
 
 export interface AppState {

@@ -9,6 +9,8 @@ import React, {
   useRef,
 } from 'react';
 import { getProtocol, recommendedPressure } from './protocols';
+import { clearQueue, enqueue, flush, opsForAction, pull, type Pulled } from './sync';
+import { useAuth } from './auth';
 import type {
   AppState,
   Checkin,
@@ -35,11 +37,12 @@ export const initialState: AppState = {
   },
   purchases: [{ id: 'seed-40', date: new Date().toISOString(), count: 40, note: 'Paket 40 sessioner' }],
   sessions: [],
-  settings: { sound: true, haptics: true, flash: true, notifications: true, reminders: true, reminderDays: 5 },
+  settings: { sound: true, haptics: true, flash: true, notifications: true, reminders: true, reminderDays: 5, lastPressure: 1.5, lastDuration: 60, lastCycle: '20/5' },
 };
 
 type Action =
   | { type: 'hydrate'; state: AppState }
+  | { type: 'hydrateRemote'; data: Pulled }
   | { type: 'reset' }
   | { type: 'completeOnboarding'; profile: Profile; purchase?: Purchase }
   | { type: 'updateProfile'; patch: Partial<Profile> }
@@ -56,6 +59,17 @@ function reducer(state: AppState, action: Action): AppState {
   switch (action.type) {
     case 'hydrate':
       return { ...initialState, ...action.state, settings: { ...initialState.settings, ...action.state.settings } };
+    case 'hydrateRemote':
+      // Servern är sanningen för köp och sessioner. Profil och inställningar
+      // slås ihop med lokala värden (servern vinner där den har något).
+      return {
+        ...state,
+        onboarded: true,
+        profile: { ...state.profile, ...action.data.profile },
+        settings: { ...state.settings, ...action.data.settings },
+        purchases: action.data.purchases,
+        sessions: [...action.data.sessions].sort((a, b) => a.date.localeCompare(b.date)),
+      };
     case 'reset':
       return { ...initialState, profile: { ...initialState.profile, protocolStartedAt: new Date().toISOString() } };
     case 'completeOnboarding':
@@ -126,7 +140,7 @@ interface StoreValue {
   state: AppState;
   ready: boolean;
   derived: Derived;
-  dispatch: React.Dispatch<Action>;
+  dispatch: (action: Action) => void;
 }
 
 const StoreContext = createContext<StoreValue | null>(null);
@@ -190,16 +204,67 @@ function computeDerived(state: AppState): Derived {
 }
 
 export function StoreProvider({ children }: { children: React.ReactNode }) {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, rawDispatch] = useReducer(reducer, initialState);
   const [ready, setReady] = React.useState(false);
   const hydrated = useRef(false);
+  const stateRef = useRef(state);
+  stateRef.current = state;
+  const auth = useAuth();
+  const userIdRef = useRef<string | null>(auth.userId);
+  userIdRef.current = auth.userId;
+
+  // Varje ändring går till reducern och, om inloggad, till synk-kön.
+  const dispatch = useCallback(
+    (action: Action) => {
+      const before = stateRef.current;
+      const after = reducer(before, action);
+      rawDispatch(action);
+      const uid = userIdRef.current;
+      if (uid) {
+        for (const op of opsForAction(action as { type: string }, before, after)) {
+          enqueue(op, uid).catch(() => undefined);
+        }
+      }
+    },
+    [],
+  );
+
+  // Inloggad: hämta allt från servern och skicka det som ligger i kön.
+  useEffect(() => {
+    if (!ready || !auth.userId) return;
+    const uid = auth.userId;
+    (async () => {
+      // Sessioner som gjorts utan konto följer med upp (upsert, ofarligt att upprepa).
+      for (const session of stateRef.current.sessions) {
+        await enqueue({ type: 'upsertSession', session }, uid).catch(() => undefined);
+      }
+      await flush(uid).catch(() => undefined);
+      try {
+        const data = await pull(uid);
+        if (data) rawDispatch({ type: 'hydrateRemote', data });
+      } catch {
+        // offline: behåll lokala data
+      }
+    })();
+  }, [ready, auth.userId]);
+
+  // Utloggad från ett inloggat läge: rensa lokalt så nästa kund inte ser datan.
+  const wasLoggedIn = useRef(false);
+  useEffect(() => {
+    if (auth.userId) wasLoggedIn.current = true;
+    else if (wasLoggedIn.current) {
+      wasLoggedIn.current = false;
+      clearQueue().catch(() => undefined);
+      rawDispatch({ type: 'reset' });
+    }
+  }, [auth.userId]);
 
   useEffect(() => {
     AsyncStorage.getItem(STORAGE_KEY)
       .then((raw) => {
         if (raw) {
           const parsed = JSON.parse(raw) as AppState;
-          dispatch({ type: 'hydrate', state: parsed });
+          rawDispatch({ type: 'hydrate', state: parsed });
         }
       })
       .catch(() => undefined)
