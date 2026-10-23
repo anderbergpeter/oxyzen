@@ -40,7 +40,7 @@ export default function Protocols() {
                 <Pill tone="gray">{p.perWeek}</Pill>
               </View>
               {seniorWarn ? (
-                <Text style={{ fontSize: 12, color: colors.amber, marginTop: 8 }}>
+                <Text style={{ fontSize: 12, color: colors.amberText, marginTop: 8 }}>
                   Vi föreslår max 1,6 ATA för 65+. Appen sänker trycket automatiskt, personalen kan ändra.
                 </Text>
               ) : null}

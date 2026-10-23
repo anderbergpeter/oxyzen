@@ -24,7 +24,7 @@ export function Wordmark({ size = 'large', align = 'flex-start' }: { size?: 'lar
           fontFamily: fonts.logoSub,
           fontSize: big ? 10 : 7,
           letterSpacing: big ? 4.2 : 2.3,
-          color: colors.brass,
+          color: colors.brassSub,
           marginTop: big ? 6 : 1,
           marginRight: big ? -4.2 : -2.3,
         }}

@@ -32,7 +32,7 @@ export default function SessionSetup() {
       />
       <Muted style={{ marginTop: 6 }}>Trycket styrs av kammaren, det här är för din egen logg.</Muted>
       {seniorWarn ? (
-        <Text style={{ fontSize: 13, color: colors.amber, marginTop: 6 }}>Över 1,6 ATA för 65+: stäm av med personalen.</Text>
+        <Text style={{ fontSize: 13, color: colors.amberText, marginTop: 6 }}>Över 1,6 ATA för 65+: stäm av med personalen.</Text>
       ) : null}
       {!advanced ? (
         <Button
@@ -42,7 +42,7 @@ export default function SessionSetup() {
           style={{ alignSelf: 'flex-start', paddingHorizontal: 0 }}
         />
       ) : (
-        <Text style={{ fontSize: 13, color: colors.amber, marginTop: 8 }}>
+        <Text style={{ fontSize: 13, color: colors.amberText, marginTop: 8 }}>
           Över 2,0 ATA är inte ett wellness-protokoll. Bara efter överenskommelse med personalen.
         </Text>
       )}

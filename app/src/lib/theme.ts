@@ -1,13 +1,16 @@
 import { Platform } from 'react-native';
 
 // Varm spa-palett: sand, kalksten och valnöt.
+// Alla textfärger klarar WCAG AA (4,5:1) mot kort och bakgrund,
+// loggan (stor text) och kontrollramar klarar 3:1.
 export const colors = {
   bg: '#F3EDE4',
   card: '#FCF9F4',
   border: '#E6DDD0',
   text: '#2B2420',
-  textSecondary: '#6F635A',
-  textMuted: '#9A8E83',
+  textSecondary: '#5B514A',
+  textMuted: '#6D6158',
+  inputBorder: '#8E8276',
 
   // Primär accent: valnöt
   teal: '#6B4A33',
@@ -37,7 +40,8 @@ export const colors = {
   grayText: '#4A423B',
   segmentBg: '#E8E0D4',
   wood: '#A8784A',
-  brass: '#B3A078',
+  brass: '#8E7A52',
+  brassSub: '#6E5D3A',
 };
 
 export const fonts = {
