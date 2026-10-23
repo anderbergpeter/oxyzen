@@ -10,7 +10,21 @@ const dist = path.join(app, 'dist');
 const run = (cmd, cwd = app) => execSync(cmd, { cwd, stdio: 'inherit' });
 const out = (cmd, cwd = app) => execSync(cmd, { cwd, encoding: 'utf8' }).trim();
 
-run('npx expo export --platform web');
+// Standard: demo utan backend (allt lokalt i telefonen). Kör med
+// --with-backend för att ta med nycklarna från .env.
+const envFile = path.join(app, '.env');
+const envBackup = path.join(app, '.env.deploy-bak');
+const demo = !process.argv.includes('--with-backend');
+if (demo && fs.existsSync(envFile)) {
+  // Expo läser .env även om variablerna sätts tomma, så vi flyttar undan filen.
+  fs.renameSync(envFile, envBackup);
+  console.log('Bygger demo utan backend (lägg till --with-backend för Supabase).');
+}
+try {
+  run('npx expo export --platform web --clear');
+} finally {
+  if (fs.existsSync(envBackup)) fs.renameSync(envBackup, envFile);
+}
 fs.copyFileSync(path.join(dist, 'index.html'), path.join(dist, '404.html'));
 fs.writeFileSync(path.join(dist, '.nojekyll'), '');
 

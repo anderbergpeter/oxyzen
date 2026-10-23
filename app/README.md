@@ -81,6 +81,9 @@ npm run deploy
 ```
 
 Bygger och pushar `dist/` till grenen `gh-pages`, som Pages serverar.
+Standard är demo-läge utan backend (ingen inloggning, allt sparas i
+telefonen). `npm run deploy -- --with-backend` tar med nycklarna från
+`.env`, använd det när det skarpa Supabase-projektet finns.
 Sökvägarna i `public/` är satta till `/oxyzen/` för det. Vill du hosta
 på en egen domän i roten: ta bort `baseUrl` i `app.json` och byt
 `/oxyzen/` mot `/` i `public/`.
