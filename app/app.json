@@ -1,0 +1,48 @@
+{
+  "expo": {
+    "name": "Oxyzen",
+    "slug": "oxyzen",
+    "version": "0.1.0",
+    "scheme": "oxyzen",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#F4F7F5"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "se.oxyzen.app",
+      "infoPlist": {
+        "UIBackgroundModes": ["audio"]
+      }
+    },
+    "android": {
+      "package": "se.oxyzen.app",
+      "adaptiveIcon": {
+        "backgroundColor": "#F4F7F5",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro",
+      "output": "single"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-audio",
+      "expo-font",
+      [
+        "expo-notifications",
+        { "color": "#1D9E75" }
+      ]
+    ],
+    "experiments": { "typedRoutes": true }
+  }
+}
