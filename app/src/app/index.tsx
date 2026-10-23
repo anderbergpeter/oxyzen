@@ -61,9 +61,9 @@ function TileRow({ tile }: { tile: Tile }) {
     >
       <View
         style={{
-          width: 60,
-          height: 60,
-          borderRadius: 30,
+          width: 54,
+          height: 54,
+          borderRadius: 27,
           backgroundColor: available ? colors.tealLight : colors.segmentBg,
           alignItems: 'center',
           justifyContent: 'center',
@@ -75,7 +75,7 @@ function TileRow({ tile }: { tile: Tile }) {
       <View style={{ flex: 1 }}>
         <Text
           style={{
-            fontSize: 28,
+            fontSize: 25,
             fontFamily: fonts.serif,
             color: available ? colors.text : colors.textSecondary,
             marginBottom: 2,
