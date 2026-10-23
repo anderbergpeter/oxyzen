@@ -9,7 +9,8 @@
     "web": "expo start --web",
     "typecheck": "tsc --noEmit",
     "build:web": "expo export --platform web",
-    "serve:web": "npx --yes serve dist -l 8090 -s"
+    "serve:web": "npx --yes serve dist -l 8090 -s",
+    "deploy": "expo export --platform web && node -e \"const f=require('fs');f.copyFileSync('dist/index.html','dist/404.html');f.writeFileSync('dist/.nojekyll','')\" && npx --yes gh-pages -d dist -t -m \"Publicera PWA\""
   },
   "private": true,
   "dependencies": {
